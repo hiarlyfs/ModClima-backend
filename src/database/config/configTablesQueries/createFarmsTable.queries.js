@@ -1,5 +1,6 @@
 const createFarms = `CREATE TABLE IF NOT EXISTS farms (
-  id serial NOT NULL,
+  id serial,
+  code bigint NOT NULL UNIQUE,
   name varchar(255),
   PRIMARY KEY (id)
   );

@@ -1,6 +1,10 @@
 const fieldsRoutes = require('express').Router();
-const { createField } = require('../controllers/field/field.controller');
+const {
+  createField,
+  getField,
+} = require('../controllers/field/field.controller');
 
 fieldsRoutes.post('/fields', createField);
+fieldsRoutes.get('/fields', getField);
 
 module.exports = fieldsRoutes;

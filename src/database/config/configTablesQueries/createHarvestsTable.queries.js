@@ -1,5 +1,6 @@
 const createHarvests = `CREATE TABLE IF NOT EXISTS harvests (
-  id serial NOT NULL,
+  id serial,
+  code bigint NOT NULL UNIQUE,
   start_date date NOT NULL,
   final_date date NOT NULL,
   PRIMARY KEY (id)

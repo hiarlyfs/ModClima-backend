@@ -4,12 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "prestart": "node src/database/config/database.config.js",
     "start": "node src/index.js",
+    "predev": "node src/database/config/database.config.js",
     "dev": "nodemon src/index.js",
-    "test": "jest"
+    "pretest": "MODE=TEST node src/database/config/database.config.js",
+    "test": "MODE=TEST jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jest": "^26.4.1",
     "pg": "^8.3.2",
