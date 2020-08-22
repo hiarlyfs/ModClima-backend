@@ -4,11 +4,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prestart": "node src/database/config/database.config.js",
+    "prestart": "node src/database/database.init.js",
     "start": "node src/index.js",
-    "predev": "node src/database/config/database.config.js",
+    "predev": "node src/database/database.init.js",
     "dev": "nodemon src/index.js",
-    "pretest": "MODE=TEST node src/database/config/database.config.js",
+    "pretest": "node src/database/database.init.js",
     "test": "MODE=TEST jest"
   },
   "dependencies": {
@@ -17,6 +17,9 @@
     "express": "^4.17.1",
     "jest": "^26.4.1",
     "pg": "^8.3.2",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.4",
+    "sequelize-cli": "^6.2.0",
     "supertest": "^4.0.2",
     "websocket": "^1.0.31"
   },
