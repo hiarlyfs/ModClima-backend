@@ -25,7 +25,11 @@ async function saveFieldInDatabase({
       values: [code, `Point(${longitude} ${latitude})`],
     });
 
-    return { rowsAffected: data.rowCount, rowId: data.rows[0].id };
+    return {
+      id: data.rows[0].id,
+      code,
+      coordinates: { latitude, longitude },
+    };
   } catch (err) {
     throw new Error('An erro ocurred');
   }

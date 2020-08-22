@@ -1,7 +1,9 @@
 const rootRoutes = require('express').Router();
 
-const fieldRoutes = require('./fields.routes');
+const fieldsRoutes = require('./fields.routes');
+const farmsRoutes = require('./farms.routes');
 
-rootRoutes.use(fieldRoutes);
+rootRoutes.use(fieldsRoutes);
+rootRoutes.use(farmsRoutes);
 
 module.exports = rootRoutes;

@@ -1,7 +1,7 @@
 const {
   saveFieldInDatabase,
   searchFieldByCode,
-} = require('../../database/useCases/fields.useCase');
+} = require('../database/useCases/fields.useCase');
 
 async function createField(req, res) {
   const { code, coordinates } = req.body;

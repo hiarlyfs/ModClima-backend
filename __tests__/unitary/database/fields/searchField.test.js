@@ -3,8 +3,8 @@ const {
   saveFieldInDatabase,
 } = require('../../../../src/database/useCases/fields.useCase');
 
-describe('Test the fields resources in database', () => {
-  test('Should be possible create a new field in the database', async () => {
+describe('Test the search fields resources in database', () => {
+  test('Should be possible to get field by code in the database', async () => {
     const code = Date.now();
     await saveFieldInDatabase({
       code,
