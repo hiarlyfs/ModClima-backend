@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const Farm = require('../../../models/Farm');
 const Field = require('../../../models/Field');
 
@@ -6,9 +7,10 @@ const SearchByCode = function () {
     try {
       const farms = await Farm.findOne({
         where: { code },
+        include: 'fields',
       });
 
-      console.log(farms);
+      return farms.toJSON();
     } catch (err) {
       console.log(err);
       throw new Error(
@@ -21,10 +23,16 @@ const SearchByCode = function () {
 const SearchByName = function () {
   this.getFarm = async function (name) {
     try {
-      const farms = await Farm.findOne({
-        where: { name },
+      const farms = await Farm.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${name}%`,
+          },
+        },
+        include: 'fields',
       });
-      console.log(farms);
+      const farmsSerialized = farms.map((farm) => farm.toJSON());
+      return farmsSerialized;
     } catch (err) {
       console.log(err);
       throw new Error(
