@@ -8,7 +8,7 @@
     "start": "node src/index.js",
     "predev": "node src/database/database.init.js",
     "dev": "nodemon src/index.js",
-    "pretest": "node src/database/database.init.js",
+    "pretest": "MODE=TEST node src/database/database.init.js",
     "test": "MODE=TEST jest"
   },
   "dependencies": {

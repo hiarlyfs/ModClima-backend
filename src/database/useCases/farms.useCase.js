@@ -1,5 +1,5 @@
 const Farm = require('../../models/Farm');
-const FarmField = require('../../models/FarmsXFields');
+const { saveRelationships } = require('./farmsFields.useCase');
 const sequelize = require('../sequelizeClient');
 const selectSearchFarmStrategy = require('./strategies/searchFarms.strategies');
 
@@ -7,18 +7,15 @@ async function saveFarmInDatabase({ code, name, fields }) {
   const transaction = await sequelize.transaction();
   try {
     const farm = await (
-      await Farm.create({ code, name }, { transaction, include: 'fields' })
+      await Farm.create({ code, name }, { transaction })
     ).toJSON();
 
-    if (fields) {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const fieldId of fields) {
-        // eslint-disable-next-line no-await-in-loop
-        await FarmField.create({ farmId: farm.id, fieldId }, { transaction });
-      }
-    }
-
     await transaction.commit();
+
+    // The relationship has to be save in the table farms_fields
+    // after save the farm in the farm table. This void the farmId don't
+    // be found in the farm table.
+    if (fields) await saveRelationships(fields, farm.id);
     return farm;
   } catch (err) {
     console.log(err);

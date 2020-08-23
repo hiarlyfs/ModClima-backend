@@ -1,6 +1,6 @@
 const Field = require('../models/Field');
 const Farm = require('../models/Farm');
-const FarmFields = require('../models/FarmsXFields');
+const FarmFields = require('../models/Farms_Fields');
 
 (async () => {
   await Field.sync({ force: true });
