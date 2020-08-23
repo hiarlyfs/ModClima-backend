@@ -1,28 +1,25 @@
-const dbClient = require('../database.client');
-const { querySaveRelationFarmField } = require('./utils/farms.utils');
+const Farm = require('../../models/Farm');
+const FarmField = require('../../models/FarmsXFields');
+const { searchFieldByCode } = require('./fields.useCase');
+const sequelize = require('../sequelizeClient');
 const selectSearchFarmStrategy = require('./strategies/searchFarms.strategies');
 
 async function saveFarmInDatabase({ code, name, fields }) {
+  const transaction = await sequelize.transaction();
   try {
-    const data = await dbClient.query(
-      'INSERT INTO farms(code, name) VALUES ($1, $2) RETURNING id;',
-      [code, name]
-    );
+    const farm = await (
+      await Farm.create({ code, name }, { transaction })
+    ).toJSON();
 
-    const farmId = data.rows[0].id;
+    await transaction.commit();
 
-    if (fields) {
-      await dbClient.query(querySaveRelationFarmField(fields, farmId));
-    }
+    // TODO: Salvar o relacionamento da tebale FarmsXFields
+    if (fields) await FarmField.create({ farmId: farm.id, fieldId: 1 });
 
-    return {
-      id: farmId,
-      code,
-      name,
-      fields,
-    };
+    return farm;
   } catch (err) {
     console.log(err);
+    transaction.rollback();
     throw new Error('An erro ocurred trying to save in the database');
   }
 }

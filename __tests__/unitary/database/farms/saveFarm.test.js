@@ -20,7 +20,7 @@ describe('Test the farms save resources in database', () => {
     const response = await saveFarmInDatabase({
       code: Date.now(),
       name: 'Farm test',
-      fields: [field1.id, field2.id],
+      fields: [field1.code, field2.code],
     });
 
     return expect(response).toMatchObject({

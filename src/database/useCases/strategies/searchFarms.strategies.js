@@ -1,17 +1,18 @@
-const dbClient = require('../../database.client');
+const Farm = require('../../../models/Farm');
+const Field = require('../../../models/Field');
 
 const SearchByCode = function () {
   this.getFarm = async function (code) {
     try {
-      const farm = await dbClient.query('SELECT * FROM farms WHERE code = $1', [
-        code,
-      ]);
+      const farms = await Farm.findOne({
+        where: { code },
+      });
 
-      return farm.rows[0];
+      console.log(farms);
     } catch (err) {
       console.log(err);
       throw new Error(
-        'An erro ocurred while trying to search in the database by code'
+        'An erro ocurred while trying to search in the database by code',
       );
     }
   };
@@ -20,16 +21,14 @@ const SearchByCode = function () {
 const SearchByName = function () {
   this.getFarm = async function (name) {
     try {
-      const farm = await dbClient.query(
-        'SELECT * FROM farms WHERE LOWER(farms.name) LIKE $1;',
-        [`%${String(name).toLowerCase()}%`]
-      );
-
-      return farm.rows;
+      const farms = await Farm.findOne({
+        where: { name },
+      });
+      console.log(farms);
     } catch (err) {
       console.log(err);
       throw new Error(
-        'An erro ocurred while trying to search in the database by name'
+        'An erro ocurred while trying to search in the database by name',
       );
     }
   };
