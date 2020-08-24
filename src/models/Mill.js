@@ -1,15 +1,12 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database/sequelizeClient');
 
-const Farm = sequelize.define(
-  'farm',
+const Mill = sequelize.define(
+  'Mill',
   {
-    code: { type: DataTypes.BIGINT, allowNull: false, unique: true },
     name: { type: DataTypes.STRING, allowNull: false },
   },
-  {
-    tableName: 'farms',
-  },
+  { tableName: 'mills' },
 );
 
-module.exports = Farm;
+module.exports = Mill;

@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-const Farm = require('./Farm');
 const sequelize = require('../database/sequelizeClient');
 
 const Field = sequelize.define(
