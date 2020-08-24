@@ -26,9 +26,7 @@ async function saveFarmInDatabase({ code, name, fields }) {
 
 // Seach Farm using Strategy Pattern -> avoid big conditional structures
 
-const SearchFarm = function () {
-  this.searchDb = '';
-};
+const SearchFarm = function () {};
 
 SearchFarm.prototype = {
   setSearchMethod(searchMethod) {
