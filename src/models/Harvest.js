@@ -5,8 +5,8 @@ const Harvest = sequelize.define(
   'Harvest',
   {
     code: { type: DataTypes.BIGINT, allowNull: false, unique: true },
-    start: { type: DataTypes.DATE, allowNull: false },
-    end: { type: DataTypes.DATE, allowNull: false },
+    start: { type: DataTypes.DATEONLY, allowNull: false },
+    end: { type: DataTypes.DATEONLY, allowNull: false },
   },
   {
     tableName: 'harvests',

@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 const Farm = require('../../../models/Farm');
-const Field = require('../../../models/Field');
+const serializeFarms = require('../utils/serializeMultipleEntities');
 
 const SearchByCode = function () {
   this.getFarm = async function (code) {
@@ -31,7 +31,7 @@ const SearchByName = function () {
         },
         include: 'fields',
       });
-      const farmsSerialized = farms.map((farm) => farm.toJSON());
+      const farmsSerialized = serializeFarms(farms);
       return farmsSerialized;
     } catch (err) {
       console.log(err);

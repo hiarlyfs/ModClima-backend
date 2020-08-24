@@ -1,7 +1,10 @@
+const { Op } = require('sequelize');
+const sequelize = require('../../sequelizeClient');
 const Harvest = require('../../../models/Harvest');
+const serializeHarvests = require('../utils/serializeMultipleEntities');
 
 const SearchByCode = function () {
-  this.getHarvests = async function (code) {
+  this.getHarvests = async ({ code }) => {
     try {
       const harvest = await Harvest.findOne({
         where: { code },
@@ -16,10 +19,37 @@ const SearchByCode = function () {
   };
 };
 
-// TODO: Search method by start and end date
+const SearchByStartAndEndDate = function () {
+  this.getHarvests = async ({ start, end }) => {
+    const transaction = await sequelize.transaction();
+    try {
+      const harvests = await Harvest.findAll({
+        where: {
+          [Op.and]: [{ start }, { end }],
+        },
+        include: 'farms',
+        transaction,
+      });
+
+      await transaction.commit();
+
+      const harvestsSerialized = serializeHarvests(harvests);
+      return harvestsSerialized;
+    } catch (err) {
+      console.log(err);
+      await transaction.rollback();
+      throw new Error(
+        'An error occurred trying to search the harvest by start and end date.',
+      );
+    }
+  };
+};
 
 const selectSearchHarvestStrategy = (fieldName) => {
-  const strategies = { code: new SearchByCode() };
+  const strategies = {
+    code: new SearchByCode(),
+    start_end: new SearchByStartAndEndDate(),
+  };
 
   return strategies[fieldName];
 };

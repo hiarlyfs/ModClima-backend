@@ -5,9 +5,9 @@ const Harvest = require('../models/Harvest');
 const HarvestsFarms = require('../models/Harvests_Farms');
 
 (async () => {
-  await Field.sync({ force: true });
-  await Farm.sync({ force: true });
-  await FarmFields.sync({ force: true });
-  await Harvest.sync({ force: true });
-  await HarvestsFarms.sync({ force: true });
+  await Field.sync();
+  await Farm.sync();
+  await FarmFields.sync();
+  await Harvest.sync();
+  await HarvestsFarms.sync();
 })();
