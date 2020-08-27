@@ -8,19 +8,19 @@ const {
 describe('Test the farms save resources in database', () => {
   test('Should be possible create a new farm in the database', async () => {
     const field1 = await saveFieldInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       coordinates: { latitude: -7.0, longitude: -35.8 },
     });
 
     const field2 = await saveFieldInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       coordinates: { latitude: -7.0, longitude: -35.8 },
     });
 
     const response = await saveFarmInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       name: 'Farm test',
-      fields: [field1.id, field2.id],
+      fieldIds: [field1.id, field2.id],
     });
 
     return expect(response).toMatchObject({

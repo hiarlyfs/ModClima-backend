@@ -7,7 +7,7 @@ const {
 describe('Test capacity of create farms', () => {
   test('Should be possible create a farms withou fields', async () => {
     const response = await request(app).post('/farms').send({
-      code: Date.now(),
+      code: Date.now().toString(),
       name: 'Farm Test',
     });
 
@@ -16,21 +16,21 @@ describe('Test capacity of create farms', () => {
 
   test('Should be possible create a farms with fields', async () => {
     const field1 = await saveFieldInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       coordinates: { latitude: -7.0, longitude: -35.8 },
     });
 
     const field2 = await saveFieldInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       coordinates: { latitude: -7.0, longitude: -35.8 },
     });
 
     const response = await request(app)
       .post('/farms')
       .send({
-        code: Date.now(),
+        code: Date.now().toString(),
         name: 'Farm Test',
-        fields: [field1.id, field2.id],
+        fieldIds: [field1.id, field2.id],
       });
 
     return expect(response.status).toBe(200);

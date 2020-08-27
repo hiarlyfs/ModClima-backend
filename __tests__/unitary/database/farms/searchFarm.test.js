@@ -5,7 +5,7 @@ const {
 
 describe('Test the farms search resources in database', () => {
   test('Should be possible get a farms in the database by code', async () => {
-    const code = Date.now();
+    const code = Date.now().toString();
 
     await saveFarmInDatabase({ code, name: `Farm test ${code}` });
 
@@ -19,12 +19,12 @@ describe('Test the farms search resources in database', () => {
 
   test('Should be possible get a farms in the database by name', async () => {
     await saveFarmInDatabase({
-      code: Date.now(),
-      name: `Farm test ${Date.now()}`,
+      code: Date.now().toString(),
+      name: `Farm test ${Date.now().toString()}`,
     });
     await saveFarmInDatabase({
-      code: Date.now(),
-      name: `Farm test ${Date.now()}`,
+      code: Date.now().toString(),
+      name: `Farm test ${Date.now().toString()}`,
     });
 
     const response = await searchFarms('name', 'farm');

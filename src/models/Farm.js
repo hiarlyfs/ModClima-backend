@@ -4,7 +4,7 @@ const sequelize = require('../database/sequelizeClient');
 const Farm = sequelize.define(
   'farm',
   {
-    code: { type: DataTypes.BIGINT, allowNull: false, unique: true },
+    code: { type: DataTypes.STRING, allowNull: false, unique: true },
     name: { type: DataTypes.STRING, allowNull: false },
   },
   {

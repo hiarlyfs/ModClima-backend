@@ -3,7 +3,7 @@ const { saveRelationships } = require('./farmsFields.useCase');
 const sequelize = require('../sequelizeClient');
 const selectSearchFarmStrategy = require('./strategies/searchFarms.strategies');
 
-async function saveFarmInDatabase({ code, name, fields }) {
+async function saveFarmInDatabase({ code, name, fieldIds }) {
   const transaction = await sequelize.transaction();
   try {
     const farm = await (
@@ -15,7 +15,7 @@ async function saveFarmInDatabase({ code, name, fields }) {
     // The relationship has to be save in the table farms_fields
     // after save the farm in the farm table. This void the farmId don't
     // be found in the farm table.
-    if (fields) await saveRelationships(fields, farm.id);
+    if (fieldIds) await saveRelationships(fieldIds, farm.id);
     return farm;
   } catch (err) {
     console.log(err);

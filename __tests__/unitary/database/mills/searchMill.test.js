@@ -18,12 +18,12 @@ describe('Test the search mills resources in the database', () => {
 
   test('Should be possible search mills by name with harvests', async () => {
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: new Date(),
       end: new Date(),
     });
 
-    const now = Date.now();
+    const now = Date.now().toString();
     await saveMillInDatabase({
       name: `Mill test ${now}`,
       harvestIds: [harvest.id],

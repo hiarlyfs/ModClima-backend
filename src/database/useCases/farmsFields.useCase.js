@@ -1,12 +1,12 @@
 const FarmField = require('../../models/Farms_Fields');
 const sequelize = require('../sequelizeClient');
 
-async function saveRelationships(fieldsId, farmId) {
+async function saveRelationships(fieldIds, farmId) {
   const transaction = await sequelize.transaction();
   console.log('Farm id', farmId);
   try {
     // eslint-disable-next-line no-restricted-syntax
-    for (const fieldId of fieldsId) {
+    for (const fieldId of fieldIds) {
       // eslint-disable-next-line no-await-in-loop
       await FarmField.create({ farmId, fieldId }, { transaction });
     }

@@ -10,7 +10,7 @@ describe('Test search harvest database resources', () => {
   test('Should be possible search for harvest by code', async () => {
     const today = new Date();
     const saveHarvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: new Date(
         today.getFullYear() + 1,
@@ -28,11 +28,11 @@ describe('Test search harvest database resources', () => {
   test('Shoul be possible search harvests by start and end date', async () => {
     const today = new Date();
     const farm = await saveFarmInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       name: 'Farm test',
     });
     await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: new Date(
         today.getFullYear() + 1,
@@ -42,7 +42,7 @@ describe('Test search harvest database resources', () => {
       farmIds: [farm.id],
     });
     await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: new Date(
         today.getFullYear() + 1,
@@ -53,7 +53,7 @@ describe('Test search harvest database resources', () => {
     });
 
     await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: new Date(
         today.getFullYear(),

@@ -4,9 +4,8 @@ const {
 } = require('../database/useCases/farms.useCase');
 
 async function createFarms(req, res) {
-  const { code, name, fields } = req.body;
   try {
-    const data = await saveFarmInDatabase({ code, name, fields });
+    const data = await saveFarmInDatabase(req.body);
     return res.send({ data });
   } catch (err) {
     return res.status(400).send({ error: 'An error occurred' });
@@ -18,7 +17,7 @@ async function getFarms(req, res) {
     const fieldName = Object.keys(req.query)[0];
     const fieldValue = req.query[fieldName];
     const farms = await searchFarms(fieldName, fieldValue);
-    return res.send({ farms });
+    return Array.isArray(farms) ? res.send({ farms }) : res.send({farms: [farms]}); 
   } catch (err) {
     return res.status(400).send({ error: 'An error occurred' });
   }

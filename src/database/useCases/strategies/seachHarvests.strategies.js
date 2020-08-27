@@ -1,6 +1,8 @@
 const { Op } = require('sequelize');
 const sequelize = require('../../sequelizeClient');
 const Harvest = require('../../../models/Harvest');
+const Farm = require('../../../models/Farm');
+const Field = require('../../../models/Field');
 const serializeHarvests = require('../utils/serializeMultipleEntities');
 
 const SearchByCode = function () {
@@ -8,7 +10,7 @@ const SearchByCode = function () {
     try {
       const harvest = await Harvest.findOne({
         where: { code },
-        include: 'farms',
+        include: [{model: Farm, as: 'farms', include: [{model: Field, as: 'fields' }] }],
       });
 
       return harvest.toJSON();
@@ -27,7 +29,7 @@ const SearchByStartAndEndDate = function () {
         where: {
           [Op.and]: [{ start }, { end }],
         },
-        include: 'farms',
+        include: [{model: Farm, as: 'farms', include: [{model: Field, as: 'fields' }] }],
         transaction,
       });
 

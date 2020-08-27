@@ -16,12 +16,12 @@ describe('Save mill in database resources', () => {
 
   test('Should be possible save a mill with harvest in the database', async () => {
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: new Date(),
       end: new Date(),
     });
     const mill = await saveMillInDatabase({
-      name: `Mill test ${Date.now()}`,
+      name: `Mill test ${Date.now().toString()}`,
       harvestIds: [harvest.id],
     });
 

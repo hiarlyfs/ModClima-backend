@@ -11,11 +11,11 @@ describe('Test the capacity of get harvests', () => {
   test('Should be possible get a harvest by code', async () => {
     const today = new Date();
     const farm = await saveFarmInDatabase({
-      code: Date.now(),
-      name: `farm test ${Date.now()}`,
+      code: Date.now().toString(),
+      name: `farm test ${Date.now().toString()}`,
     });
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: today,
       farmIds: [farm.id],
@@ -25,7 +25,10 @@ describe('Test the capacity of get harvests', () => {
 
     expect(response.status).toBe(200);
     expect(response.body.harvests).toBeDefined();
-    return expect(response.body.harvests.farms.length).toBeGreaterThanOrEqual(
+    expect(response.body.harvests[0]).toMatchObject({
+	    id: expect.any(Number)
+    })
+    return expect(response.body.harvests[0].farms.length).toBeGreaterThanOrEqual(
       1,
     );
   });
@@ -33,19 +36,19 @@ describe('Test the capacity of get harvests', () => {
   test('Should be possible get a harvest by start and end date', async () => {
     const today = new Date();
     const farm = await saveFarmInDatabase({
-      code: Date.now(),
-      name: `farm test ${Date.now()}`,
+      code: Date.now().toString(),
+      name: `farm test ${Date.now().toString()}`,
     });
 
     await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: today,
       farmIds: [farm.id],
     });
 
     await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: today,
       end: today,
       farmIds: [farm.id],

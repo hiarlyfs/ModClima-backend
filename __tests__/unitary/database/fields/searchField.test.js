@@ -5,7 +5,7 @@ const {
 
 describe('Test the search fields resources in database', () => {
   test('Should be possible to get field by code in the database', async () => {
-    const code = Date.now();
+    const code = Date.now().toString();
     await saveFieldInDatabase({
       code,
       coordinates: { latitude: -7.0, longitude: -35.8 },

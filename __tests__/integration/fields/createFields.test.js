@@ -6,7 +6,7 @@ describe('Test capacity of create fields', () => {
     const response = await request(app)
       .post('/fields')
       .send({
-        code: Date.now(),
+        code: Date.now().toString(),
         coordinates: { latitude: -7.0808606, longitude: -34.8293001 },
       });
 

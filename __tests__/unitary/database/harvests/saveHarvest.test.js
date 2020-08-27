@@ -10,7 +10,7 @@ describe('Test harvest save database resources', () => {
   test('Should be possible save a harvest without farms', async () => {
     const hoje = new Date();
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: hoje,
       end: new Date(
         hoje.getFullYear() + 1,
@@ -26,13 +26,13 @@ describe('Test harvest save database resources', () => {
 
   test('Should be possible save a harvest with farms', async () => {
     const farm = await saveFarmInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       name: 'Farm test',
     });
 
     const hoje = new Date();
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: hoje,
       end: new Date(
         hoje.getFullYear() + 1,

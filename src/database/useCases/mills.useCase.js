@@ -1,5 +1,8 @@
 const { Op } = require('sequelize');
 const Mill = require('../../models/Mill');
+const Farm = require('../../models/Farm');
+const Harvest = require('../../models/Harvest');
+const Field = require('../../models/Field');
 const { saveMillsHarvestRelationships } = require('./millsHarvests.useCase');
 const sequelize = require('../sequelizeClient');
 const serializeMills = require('./utils/serializeMultipleEntities');
@@ -30,7 +33,7 @@ async function searchMillByName(name) {
           [Op.iLike]: `%${name}%`,
         },
       },
-      include: 'harvests',
+	    include: [{model: Harvest, as: 'harvests', include: [{ model:Farm, as: 'farms', include: [{model: Field, as: 'fields'}] }]}],
     });
 
     const millsSerialized = serializeMills(mills);

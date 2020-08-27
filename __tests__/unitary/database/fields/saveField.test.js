@@ -5,7 +5,7 @@ const {
 describe('Test the save fields resources in database', () => {
   test('Should be possible create a new field in the database', async () => {
     const response = await saveFieldInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       coordinates: { latitude: -7.0, longitude: -35.8 },
     });
 

@@ -9,7 +9,7 @@ describe('Verifiy the ability of create mill', () => {
     const response = await request(app)
       .post('/mills')
       .send({
-        name: `Mill test ${Date.now()}`,
+        name: `Mill test ${Date.now().toString()}`,
       });
 
     expect(response.status).toBe(200);
@@ -20,15 +20,15 @@ describe('Verifiy the ability of create mill', () => {
 
   test('Should be possible create a mill with harvest', async () => {
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: new Date(),
-      end: Date.now(),
+      end: new Date(),
     });
 
     const response = await request(app)
       .post('/mills')
       .send({
-        name: `Mill test ${Date.now()}`,
+        name: `Mill test ${Date.now().toString()}`,
         harvestIds: [harvest.id],
       });
 

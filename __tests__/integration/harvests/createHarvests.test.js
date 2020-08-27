@@ -10,7 +10,7 @@ describe('Test capacity of create harvests', () => {
     const response = await request(app)
       .post('/harvests')
       .send({
-        code: Date.now(),
+        code: Date.now().toString(),
         start: today,
         end: new Date(
           today.getFullYear() + 1,
@@ -25,15 +25,15 @@ describe('Test capacity of create harvests', () => {
 
   test('Should be possible create harvest with farms', async () => {
     const farm = await saveFarmInDatabase({
-      code: Date.now(),
-      name: `Farm test ${Date.now()}`,
+      code: Date.now().toString(),
+      name: `Farm test ${Date.now().toString()}`,
     });
 
     const today = new Date();
     const response = await request(app)
       .post('/harvests')
       .send({
-        code: Date.now(),
+        code: Date.now().toString(),
         start: today,
         end: new Date(
           today.getFullYear() + 1,

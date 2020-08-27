@@ -10,7 +10,7 @@ const {
 describe('Verify the get mills resourcers', () => {
   test('Should be possible get mill', async () => {
     const harvest = await saveHarvestInDatabase({
-      code: Date.now(),
+      code: Date.now().toString(),
       start: new Date(),
       end: new Date(),
     });

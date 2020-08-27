@@ -19,7 +19,9 @@ const getHarvest = async (req, res) => {
   const reqParamsKeys = Object.keys(req.query);
   try {
     const harvests = await searchHarvests(reqParamsKeys.join('_'), req.query);
-    return res.send({ harvests });
+    return Array.isArray(harvests)
+      ? res.send({ harvests })
+      : res.send({ harvests: [harvests] });
   } catch (err) {
     console.log(err);
     return res
