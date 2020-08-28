@@ -10,7 +10,13 @@ const SearchByCode = function () {
     try {
       const harvest = await Harvest.findOne({
         where: { code },
-        include: [{model: Farm, as: 'farms', include: [{model: Field, as: 'fields' }] }],
+        include: [
+          {
+            model: Farm,
+            as: 'farms',
+            include: [{ model: Field, as: 'fields' }],
+          },
+        ],
       });
 
       return harvest.toJSON();
@@ -29,7 +35,13 @@ const SearchByStartAndEndDate = function () {
         where: {
           [Op.and]: [{ start }, { end }],
         },
-        include: [{model: Farm, as: 'farms', include: [{model: Field, as: 'fields' }] }],
+        include: [
+          {
+            model: Farm,
+            as: 'farms',
+            include: [{ model: Field, as: 'fields' }],
+          },
+        ],
         transaction,
       });
 

@@ -2,10 +2,12 @@ const {
   saveMillInDatabase,
   searchMillByName,
 } = require('../database/useCases/mills.useCase');
+const sendNewEntity = require('../websocket/sendNewEntity');
 
 async function createMill(req, res) {
   try {
     const mill = await saveMillInDatabase(req.body);
+    sendNewEntity({ entityName: 'mill', entityData: mill });
     return res.send({ mill });
   } catch (err) {
     console.log(err);

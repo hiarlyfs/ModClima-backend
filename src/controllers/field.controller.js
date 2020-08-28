@@ -2,11 +2,13 @@ const {
   saveFieldInDatabase,
   searchFieldByCode,
 } = require('../database/useCases/fields.useCase');
+const sendNewEntity = require('../websocket/sendNewEntity');
 
 async function createField(req, res) {
   const { code, coordinates } = req.body;
   try {
     const data = await saveFieldInDatabase({ code, coordinates });
+    sendNewEntity({ entityName: 'field', entityData: data });
     return res.send(data);
   } catch (err) {
     return res.status(400).send({ error: 'An error occurred' });

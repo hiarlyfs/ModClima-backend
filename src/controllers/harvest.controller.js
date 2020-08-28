@@ -2,10 +2,12 @@ const {
   saveHarvestInDatabase,
   searchHarvests,
 } = require('../database/useCases/harvests.useCase');
+const sendNewEntity = require('../websocket/sendNewEntity');
 
 const createHarvest = async (req, res) => {
   try {
     const harvest = await saveHarvestInDatabase(req.body);
+    sendNewEntity({ entityName: 'harvest', entityData: harvest });
     return res.send({ harvest });
   } catch (err) {
     console.log(err);
