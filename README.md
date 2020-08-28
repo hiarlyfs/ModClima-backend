@@ -23,7 +23,7 @@ to install all dependencies.
 
 - Then you can chose from one of the run mode below.
 
-## Star Mode
+## Start Mode
 
 - Create a postgres database with postgis and postgis_topology
 - Create the .env file in the root directory
@@ -67,4 +67,4 @@ to install all dependencies.
 
 ## Documentation
 
-To see the documentation run your application in start ou dev mode and access the /api-docs route or access [documentation](https://modclima-backend.herokuapp.com/)
+To see the documentation run your application in start ou dev mode and access the /api-docs route or access [documentation](https://modclima-backend.herokuapp.com/api-docs)
