@@ -1,0 +1,583 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a server to ModClima .",
+    "version": "1.0.0",
+    "title": "ModClima backend"
+  },
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/fields": {
+      "post": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Add a new field to the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Field object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "required": true
+                },
+                "coordiantes": {
+                  "type": "object",
+                  "properties": {
+                    "latitude": {
+                      "type": "integer",
+                      "required": true
+                    },
+                    "longitude": {
+                      "type": "integer",
+                      "required": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Field success created",
+            "schema": {
+              "$ref": "#/definitions/Field"
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Search for field according to a filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "description": "The code of the field.",
+            "example": "/fields?code=13d4a6wd",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Field success search",
+            "schema": {
+              "$ref": "#/definitions/Field"
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/farms": {
+      "post": {
+        "tags": [
+          "Farm"
+        ],
+        "summary": "Add a new farm to the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Farm object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "required": true
+                },
+                "name": {
+                  "type": "string",
+                  "required": true
+                },
+                "fieldIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Farm success created",
+            "schema": {
+              "$ref": "#/definitions/Farm"
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Farm"
+        ],
+        "summary": "Search for a farm accoding to a filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "description": "The code of the farm.",
+            "example": "/farms?code=13d4a6wd",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "The name of the farm.",
+            "example": "/farms?name=farm",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "farm successfully sought",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Farm"
+              }
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/harvests": {
+      "post": {
+        "tags": [
+          "Harvest"
+        ],
+        "summary": "Add a new farm to the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Farm object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "required": true
+                },
+                "start": {
+                  "type": "string",
+                  "format": "YYYY-MM-DD",
+                  "example": "2020-08-25",
+                  "required": true
+                },
+                "end": {
+                  "type": "string",
+                  "format": "YYYY-MM-DD",
+                  "example": "2020-08-25",
+                  "required": true
+                },
+                "farmIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Harvest successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Harvest"
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Harvest"
+        ],
+        "summary": "Search for a harvest accoding to a filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "code",
+            "description": "The code of the harvest",
+            "type": "string",
+            "example": "/harvest?code=adwad5"
+          },
+          {
+            "in": "query",
+            "name": "start",
+            "description": "Start of a harvest",
+            "type": "string",
+            "format": "YYYY-MM-DD",
+            "example": "/harvests?start=2020-08-25?end=2020-08-25"
+          },
+          {
+            "in": "query",
+            "name": "end",
+            "description": "End of a harvest",
+            "type": "string",
+            "format": "YYYY-MM-DD",
+            "example": "/harvests?start=2020-08-25?end=2020-08-25"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Harvest successfully sought",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Harvest"
+              }
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/mills": {
+      "post": {
+        "tags": [
+          "Mill"
+        ],
+        "summary": "Add a new mill to the database",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Farm object that needs to be added to the database",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "required": true
+                },
+                "harvestIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "MIll successfully created.",
+            "schema": {
+              "$ref": "#/definitions/Mill"
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Mill"
+        ],
+        "summary": "Search for a mill accoding to a filter",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "description": "The name of the mill",
+            "type": "string",
+            "example": "/mills?name=Mill Test"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mill successfully sought",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Mill"
+              }
+            }
+          },
+          "400": {
+            "description": "An error occured",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Field": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              },
+              "example": [
+                -44.12,
+                97.212
+              ]
+            }
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        }
+      }
+    },
+    "Farm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        }
+      }
+    },
+    "Harvest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "start": {
+          "type": "string",
+          "format": "YYYY-MM-DD",
+          "example": "2020-08-25"
+        },
+        "end": {
+          "type": "string",
+          "format": "YYYY-MM-DD",
+          "example": "2020-08-25"
+        },
+        "farms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        }
+      }
+    },
+    "Mill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "harvests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Harvest"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date",
+          "example": "2020-08-25 15:49:29.778-03"
+        }
+      }
+    }
+  }
+}
