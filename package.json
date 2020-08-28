@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "prestart": "node src/database/database.init.js",
-    "start": "node src/index.js",
+    "start": "node src/index.js --ignore __tests__",
     "predev": "node src/database/database.init.js",
     "dev": "nodemon src/index.js",
     "pretest": "MODE=TEST node __tests__/database.init.js",

@@ -25,11 +25,11 @@ to install all dependencies.
 
 ## Star Mode
 
-- Create a postgres database with postgis
+- Create a postgres database with postgis and postgis_topology
 - Create the .env file in the root directory
-- Put DB_STRING_CONNECTION environment variable in the .env file
-  - Format of DB_STRING_CONNECTION: postgres://user':'password'@'host'/'database'
-  - Example: DB_STRING_CONNECTION=postgres://user:123@127.0.0.1/modclima
+- Put DATABASE_URL environment variable in the .env file
+  - Format of DATABASE_URL: postgres://user':'password'@'host'/'database'
+  - Example: DATABASE_URL=postgres://user:123@127.0.0.1/modclima
 - Type in your terminal:
   ```bash
     yarn start
@@ -40,11 +40,11 @@ to install all dependencies.
 
 ## Dev mode
 
-- Create a postgres database with postgis
+- Create a postgres database with postgis and postgis_topology
 - Create the .env file in the root directory
-- Put DB_STRING_CONNECTION environment variable in the .env file
-  - Format of DB_STRING_CONNECTION: postgres://user':'password'@'host'/'database'
-  - Example: DB_STRING_CONNECTION=postgres://user:123@127.0.0.1/modclima
+- Put DATABASE_URL environment variable in the .env file
+  - Format of DATABASE_URL: postgres://user':'password'@'host'/'database'
+  - Example: DATABASE_URL=postgres://user:123@127.0.0.1/modclima
 - Type in your terminal:
   ```bash
     yarn dev
@@ -55,20 +55,16 @@ to install all dependencies.
 
 ## Run tests
 
-- Create a postgres database with postgis
+- Create a postgres database with postgis and postgis_topology
 - Create the .env.test file in the root directory
 - Put DB_STRING_CONNECTION environment variable in the .env.test file
-  - Format of DB_STRING_CONNECTION: postgres://'user':'password'@'host'/'database'
-  - Example: DB_STRING_CONNECTION=postgres://user:123@127.0.0.1/modclimatest
+  - Format of DATABASE_URL: postgres://'user':'password'@'host'/'database'
+  - Example: DATABASE_URL=postgres://user:123@127.0.0.1/modclimatest
 - Type in your terminal
   ```bash
     yarn test
   ```
 
-```
-
-```
-
 ## Documentation
 
-To see the documentation run your application in start ou dev mode and access the /api-docs route
+To see the documentation run your application in start ou dev mode and access the /api-docs route or access [documentation](https://modclima-backend.herokuapp.com/)
