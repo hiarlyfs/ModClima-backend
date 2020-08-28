@@ -26,6 +26,7 @@ async function saveMillInDatabase({ name, harvestIds }) {
 }
 
 async function searchMillByName(name) {
+  const transaction = await sequelize.transaction();
   try {
     const mills = await Mill.findAll({
       where: {
@@ -33,12 +34,28 @@ async function searchMillByName(name) {
           [Op.iLike]: `%${name}%`,
         },
       },
-	    include: [{model: Harvest, as: 'harvests', include: [{ model:Farm, as: 'farms', include: [{model: Field, as: 'fields'}] }]}],
+      include: [
+        {
+          model: Harvest,
+          as: 'harvests',
+          include: [
+            {
+              model: Farm,
+              as: 'farms',
+              include: [{ model: Field, as: 'fields' }],
+            },
+          ],
+        },
+      ],
+      transaction,
     });
+
+    await transaction.commit();
 
     const millsSerialized = serializeMills(mills);
     return millsSerialized;
   } catch (err) {
+    await transaction.rollback();
     console.log(err);
     throw new Error(
       'An error occured trying to search a mill by name in the database',

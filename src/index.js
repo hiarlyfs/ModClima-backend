@@ -9,10 +9,12 @@ const swaggerOptions = {
   apis: ['src/routes.js'],
 };
 
+const PORT = process.env.PORT || 3333;
+
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-app.listen(process.env.PORT || 3333, () => {
-  console.log('Server is on...');
+app.listen(PORT, () => {
+  console.log(`Nodejs server is running on port: ${PORT}`);
 });
