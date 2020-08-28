@@ -1,8 +1,8 @@
-## Description
+# Description
 
 This a backend to the [ModClima](https://bitbucket.org/modclima/challenge/src/master/) test.
 
-## Used Tecnologies
+# Used Tecnologies
 
 - [NodeJs](https://nodejs.org/en/)
 - [ExpressJs](https://expressjs.com/pt-br/)
@@ -11,40 +11,59 @@ This a backend to the [ModClima](https://bitbucket.org/modclima/challenge/src/ma
 - [Sequelize](https://sequelize.org/master/index.html)
 - [WebSockets](https://github.com/websockets/ws)
 
-## How to Run
+# How to Run
 
-# Star or Dev Mode
+- First of all install the dependencies. You can type
+
+```bash
+  yarn install
+```
+
+to install all dependencies.
+
+- Then you can chose from one of the run mode below.
+
+## Star Mode
 
 - Create a postgres database with postgis
 - Create the .env file in the root directory
 - Put DB_STRING_CONNECTION environment variable in the .env file
-  - Format of DB_STRING_CONNECTION: postgres://<user>:<password>@<host>/<database>
+  - Format of DB_STRING_CONNECTION: postgres://user':'password'@'host'/'database'
   - Example: DB_STRING_CONNECTION=postgres://user:123@127.0.0.1/modclima
-- Type in your terminal
-  - ```bash
+- Type in your terminal:
+  ```bash
     yarn start
-    ```
-
-````or
-  - ```bash
-yarn dev
-````
-
+  ```
 - Observations:
-  - yarn start run with nodejs
-  - yarn dev run with nodemon
 
-# Run tests
+  - yarn start run with nodejs
+
+## Dev mode
+
+- Create a postgres database with postgis
+- Create the .env file in the root directory
+- Put DB_STRING_CONNECTION environment variable in the .env file
+  - Format of DB_STRING_CONNECTION: postgres://user':'password'@'host'/'database'
+  - Example: DB_STRING_CONNECTION=postgres://user:123@127.0.0.1/modclima
+- Type in your terminal:
+  ```bash
+    yarn dev
+  ```
+- Observations:
+
+  - yarn dev run with [nodemon](https://nodemon.io/)
+
+## Run tests
 
 - Create a postgres database with postgis
 - Create the .env.test file in the root directory
 - Put DB_STRING_CONNECTION environment variable in the .env.test file
-  - Format of DB_STRING_CONNECTION: postgres://<user>:<password>@<host>/<database>
+  - Format of DB_STRING_CONNECTION: postgres://'user':'password'@'host'/'database'
   - Example: DB_STRING_CONNECTION=postgres://user:123@127.0.0.1/modclimatest
 - Type in your terminal
-  - ```bash
+  ```bash
     yarn test
-    ```
+  ```
 
 ```
 
