@@ -2,7 +2,10 @@ const WebSocket = require('ws');
 
 const clients = {};
 
-const wss = new WebSocket.Server({ port: 3030 });
-console.log(`Websocket server is running on port: ${wss.address().port}`);
+const createServer = (server) => {
+  const wss = new WebSocket.Server({ server });
+  console.log(`WebSocket server is running on port: ${wss.address().port}`);
+  return wss;
+};
 
-module.exports = { wss, clients };
+module.exports = { clients, createServer };
